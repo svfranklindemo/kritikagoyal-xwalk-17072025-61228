@@ -1,8 +1,7 @@
 {
   "mappings": [
-    "/content/xsc-xwalk-site/:/",
-    "/content/xsc-xwalk-site/metadata.json:/metadata.json",
-    "/content/xsc-xwalk-site/redirects.json:/redirects.json",
-    "/content/xsc-xwalk-site/configuration.json:/configuration.json"
+    "/content/kritikagoyal/pldt/:/",
+    "/content/kritikagoyal/pldt/metadata.json:/metadata.json",
+    "/content/kritikagoyal/pldt/redirects.json:/redirects.json"
   ]
 }
