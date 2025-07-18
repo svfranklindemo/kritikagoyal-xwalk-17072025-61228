@@ -33,7 +33,7 @@ header nav {
 }
 
 .header.block {
-  background: rgb(4 25 45 / 55%);
+  background: #000000;
   color: white;
   position: fixed;
   width: 100%;
