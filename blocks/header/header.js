@@ -79,15 +79,6 @@ class LoginModal {
           <span class="btn-text">Sign In</span>
           <span class="btn-loading" style="display: none;">Signing In...</span>
         </button>
-        <div class="login-modal-links">
-          <a href="#" class="forgot-password">Forgot Password?</a>
-          <a href="#" class="sign-up">Don't have an account? Sign Up</a>
-        </div>
-        <div class="login-demo-info">
-          <p><strong>Demo Credentials:</strong></p>
-          <p>Admin: admin@example.com / admin123</p>
-          <p>User: user@example.com / user123</p>
-        </div>
       </form>
     `;
     
