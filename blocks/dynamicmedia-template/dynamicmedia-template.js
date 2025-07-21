@@ -1,5 +1,5 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { isAuthorEnvironment, moveInstrumentation } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
+import { isAuthorEnvironment } from '../../scripts/scripts.js';
 
 /**
  * @param {HTMLElement} $block
@@ -74,18 +74,20 @@ export default async function decorate(block) {
         // Create parameter object
         const paramObject = {};
 
-         // Process each parameter pair
-        paramPairs.forEach(pair => {
-          const indexOfEqual = pair.indexOf('=');
-          const key = pair.slice(0, indexOfEqual).trim();
-          let value = pair.slice(indexOfEqual + 1).trim();
+        // Process each parameter pair if they exist
+        if (paramPairs && Array.isArray(paramPairs)) {
+          paramPairs.forEach(pair => {
+            const indexOfEqual = pair.indexOf('=');
+            const key = pair.slice(0, indexOfEqual).trim();
+            let value = pair.slice(indexOfEqual + 1).trim();
 
-          // Remove trailing comma if any
-          if (value.endsWith(',')) {
-            value = value.slice(0, -1);
-          }
-          paramObject[key] = value;
-        });
+            // Remove trailing comma if any
+            if (value.endsWith(',')) {
+              value = value.slice(0, -1);
+            }
+            paramObject[key] = value;
+          });
+        }
 
         // Construct the query string (preserving `$` in keys)
         const queryString = Object.entries(paramObject)

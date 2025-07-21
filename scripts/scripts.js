@@ -64,6 +64,16 @@ export function getSiteRoot(level = 3, path = window.location.pathname) {
 }
 
 /**
+ * Determine if we are in the AEM author environment
+ * @returns {boolean} True if we are in the author environment
+ */
+export function isAuthorEnvironment() {
+  return window.location.hostname.includes('author') || 
+         window.location.hostname.includes('localhost') ||
+         window.location.search.includes('wcmmode=edit');
+}
+
+/**
  * Determine if we are serving content for the block-library, if so don't load the header or footer
  * @returns {boolean} True if we are loading block library content
  */
