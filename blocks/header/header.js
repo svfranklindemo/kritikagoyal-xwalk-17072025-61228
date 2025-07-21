@@ -21,6 +21,7 @@ class LoginModal {
     this.modal = null;
     this.overlay = null;
     this.createModal();
+    this.checkExistingLogin();
   }
 
   createModal() {
@@ -81,6 +82,11 @@ class LoginModal {
         <div class="login-modal-links">
           <a href="#" class="forgot-password">Forgot Password?</a>
           <a href="#" class="sign-up">Don't have an account? Sign Up</a>
+        </div>
+        <div class="login-demo-info">
+          <p><strong>Demo Credentials:</strong></p>
+          <p>Admin: admin@example.com / admin123</p>
+          <p>User: user@example.com / user123</p>
         </div>
       </form>
     `;
@@ -189,6 +195,31 @@ class LoginModal {
     
     if (!isValid) return;
     
+    // Get form data
+    const email = form.querySelector('#login-email').value.trim();
+    const password = form.querySelector('#login-password').value;
+    
+    // Dummy user credentials
+    const dummyUsers = [
+      {
+        email: 'admin@example.com',
+        password: 'admin123',
+        name: 'Admin User',
+        variant: 'plan199'
+      },
+      {
+        email: 'user@example.com',
+        password: 'user123',
+        name: 'Regular User',
+        variant: 'plan1299'
+      }
+    ];
+    
+    // Check if credentials match any dummy user
+    const matchedUser = dummyUsers.find(user => 
+      user.email === email && user.password === password
+    );
+    
     // Show loading state
     submitBtn.disabled = true;
     btnText.style.display = 'none';
@@ -196,11 +227,29 @@ class LoginModal {
     
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Success - close modal and show success message
-      this.close();
-      this.showSuccessMessage('Successfully signed in!');
+      if (matchedUser) {
+        // Success - close modal and show success message
+        this.close();
+        this.showSuccessMessage(`Welcome back, ${matchedUser.name}!`);
+        
+        // Store login state (optional)
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userEmail', matchedUser.email);
+        localStorage.setItem('userName', matchedUser.name);
+        localStorage.setItem('userVariant', matchedUser.variant);
+        
+        // Update UI to show logged in state (optional)
+        this.updateLoginState(matchedUser);
+      } else {
+        // Invalid credentials
+        this.showErrorMessage('Invalid email or password. Please try again.');
+        
+        // Clear password field
+        form.querySelector('#login-password').value = '';
+        form.querySelector('#login-password').focus();
+      }
       
     } catch (error) {
       // Show error message
@@ -256,6 +305,82 @@ class LoginModal {
     setTimeout(() => {
       errorDiv.remove();
     }, 3000);
+  }
+
+  updateLoginState(user) {
+    // Find the login element in the navigation
+    const navLogin = document.querySelector('.nav-login');
+    if (navLogin) {
+      const loginElement = navLogin.querySelector('p');
+      if (loginElement) {
+        // Update the login text to show user is logged in
+        loginElement.textContent = `Welcome, ${user.name}`;
+        loginElement.style.cursor = 'default';
+        
+        // Remove the click event listener
+        loginElement.removeEventListener('click', this.open.bind(this));
+        
+        // Add logout functionality
+        loginElement.addEventListener('click', () => {
+          this.logout();
+        });
+        
+        // Add a logout indicator
+        loginElement.title = 'Click to logout';
+      }
+    }
+  }
+
+  logout() {
+    // Clear stored login data
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
+    
+    // Reset the login element
+    const navLogin = document.querySelector('.nav-login');
+    if (navLogin) {
+      const loginElement = navLogin.querySelector('p');
+      if (loginElement) {
+        loginElement.textContent = 'Sign In';
+        loginElement.style.cursor = 'pointer';
+        loginElement.title = '';
+        
+        // Remove logout event listener and add login event listener back
+        loginElement.removeEventListener('click', this.logout.bind(this));
+        loginElement.addEventListener('click', () => {
+          this.open();
+        });
+      }
+    }
+    
+    this.showSuccessMessage('Successfully logged out!');
+  }
+
+  checkExistingLogin() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userEmail = localStorage.getItem('userEmail');
+    const userName = localStorage.getItem('userName');
+    
+    if (isLoggedIn === 'true' && userEmail && userName) {
+      // Check if the user credentials are still valid (in our dummy users)
+      const dummyUsers = [
+        { email: 'admin@example.com', password: 'admin123', name: 'Admin User' },
+        { email: 'user@example.com', password: 'user123', name: 'Regular User' }
+      ];
+      
+      const validUser = dummyUsers.find(user => user.email === userEmail);
+      
+      if (validUser) {
+        // User is still logged in, update the UI
+        this.updateLoginState(validUser);
+      } else {
+        // Invalid stored data, clear it
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userName');
+      }
+    }
   }
 
   open() {
