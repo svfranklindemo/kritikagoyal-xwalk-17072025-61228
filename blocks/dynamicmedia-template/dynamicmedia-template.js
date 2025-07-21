@@ -12,98 +12,13 @@ export default async function decorate(block) {
   let configSrc = Array.from(block.children)[0]?.textContent?.trim(); //inline or cf
 
   
-  if(configSrc === 'inline'){
-    // Get DM Url input
-    let templateURL = inputs[1]?.textContent?.trim();
-    let variablemapping = inputs[2]?.textContent?.trim();
-
-    if(!templateURL) {
-      console.error('Missing mandatory template URL', {
-        error: error.message,
-        stack: error.stack
-      });
-      block.innerHTML = '';
-      return;
-    }
-
-    // Step 1: Convert to key-value object
-		//const paramPairs = variablemapping.match(/[^,]+=[^$]+(?:,?[^,$=][^,]*)*/g);
-		
-		// Split by comma first, then handle each parameter pair
-    const paramPairs = variablemapping.split(',');
-		const paramObject = {};
-		/*
-		paramPairs.forEach(pair => {
-			const indexOfEqual = pair.indexOf('=');
-			const key = pair.slice(0, indexOfEqual).trim();
-			let value = pair.slice(indexOfEqual + 1).trim();
-		
-			// 🧹 Remove trailing comma (if any)
-			if (value.endsWith(',')) {
-				value = value.slice(0, -1);
-			}
-		
-			paramObject[key] = value;
-		});
-		*/
-
-		if (paramPairs) {
-      paramPairs.forEach(pair => {
-        const indexOfEqual = pair.indexOf('=');
-        if (indexOfEqual !== -1) {
-          const key = pair.slice(0, indexOfEqual).trim();
-          let value = pair.slice(indexOfEqual + 1).trim();
-          
-          // Remove trailing comma (if any)
-          if (value.endsWith(',')) {
-            value = value.slice(0, -1);
-          }
-          
-          // Only add if key is not empty
-          if (key) {
-            paramObject[key] = value;
-          }
-        }
-      });
-    }
-		
-		// Manually construct the query string (preserving `$` in keys)
-		const queryString = Object.entries(paramObject)
-		.map(([key, value]) => `${key}=${value}`)
-		.join('&');
-  
-    // Combine with template URL (already includes ? or not)
-    let finalUrl = templateURL.includes('?') 
-      ? `${templateURL}&${queryString}` 
-      : `${templateURL}?${queryString}`;
-
-    console.log("Final URL:", finalUrl);
-
-    if (finalUrl) {
-      const finalImg = document.createElement('img');
-      Object.assign(finalImg, {
-        className: 'dm-template-image',
-        src: finalUrl,
-        alt: 'dm-template-image',
-      });
-       // Add error handling for image load failure
-       finalImg.onerror = function() {
-        console.warn('Failed to load image:', finalUrl);
-        // Set fallback image
-        this.src = 'https://smartimaging.scene7.com/is/image/DynamicMediaNA/WKND%20Template?wid=2000&hei=2000&qlt=100&fit=constrain'; // Replace with your fallback image path
-        this.alt = 'Fallback image - template image not correctly authored';
-      };
-      block.innerHTML = '';
-      block.append(finalImg);
-    }
-    
-  } if(configSrc === 'cf'){
+  if(configSrc === 'cf'){
 
     //https://author-p153659-e1620914.adobeaemcloud.com/graphql/execute.json/wknd-universal/DynamicMediaTemplateByPath;path=
     const CONFIG = {
       WRAPPER_SERVICE_URL: 'https://prod-31.westus.logic.azure.com:443/workflows/2660b7afa9524acbae379074ae38501e/triggers/manual/paths/invoke',
       WRAPPER_SERVICE_PARAMS: 'api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=kfcQD5S7ovej9RHdGZFVfgvA-eEqNlb6r_ukuByZ64o',
-      GRAPHQL_QUERY: '/graphql/execute.json/wknd-universal/DynamicMediaTemplateByPath'
+      GRAPHQL_QUERY: '/graphql/execute.json/lpbgenerated/GetBannerDetailsByVariation'
     };
     
     const hostname = getMetadata('hostname');	
@@ -111,7 +26,7 @@ export default async function decorate(block) {
     
     const aempublishurl = hostname?.replace('author', 'publish')?.replace(/\/$/, '');  
     
-    const persistedquery = '/graphql/execute.json/wknd-universal/DynamicMediaTemplateByPath';
+    const persistedquery = '/graphql/execute.json/lpbgenerated/GetBannerDetailsByVariation';
 
     const contentPath = block.querySelector("p.button-container > a")?.textContent?.trim();
     const isAuthor = isAuthorEnvironment();
