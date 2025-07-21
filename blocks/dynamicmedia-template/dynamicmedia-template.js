@@ -1,4 +1,3 @@
-import { getMetadata } from '../../scripts/lib-franklin.js';
 import { isAuthorEnvironment } from '../../scripts/scripts.js';
 
 /**
@@ -75,6 +74,9 @@ export default async function decorate(block) {
         // Get the template URL and parameter mappings
         const templateURL = offer?.data?.dynamicMediaTemplateByPath?.item?.dm_template;
         const paramPairs = offer?.data?.dynamicMediaTemplateByPath?.item?.var_mapping;
+        
+        console.log('Template URL from response:', templateURL);
+        console.log('Parameter pairs from response:', paramPairs);
 
         // Create parameter object
         const paramObject = {};
@@ -94,9 +96,13 @@ export default async function decorate(block) {
           });
         }
 
-        // Construct the query string (preserving `$` in keys)
+        // Construct the query string with proper URL encoding
         const queryString = Object.entries(paramObject)
-          .map(([key, value]) => `${key}=${value}`)
+          .map(([key, value]) => {
+            // Encode the value properly, but preserve the key as-is (including $ symbols)
+            const encodedValue = encodeURIComponent(value);
+            return `${key}=${encodedValue}`;
+          })
           .join('&');
 
         // Combine with template URL
@@ -105,6 +111,8 @@ export default async function decorate(block) {
           : `${templateURL}?${queryString}`;
 
         console.log("Final URL:", finalUrl);
+        console.log("Parameter object:", paramObject);
+        console.log("Query string:", queryString);
 
         // Create and append the image element
         if (finalUrl) {
@@ -114,10 +122,22 @@ export default async function decorate(block) {
             src: finalUrl,
             alt: 'dm-template-image',
           });
+
+          
+          
+          // Add success handler for image load
+          finalImg.onload = function() {
+            console.log('Image loaded successfully:', finalUrl);
+          };
           
           // Add error handling for image load failure
           finalImg.onerror = function() {
             console.warn('Failed to load image:', finalUrl);
+            console.warn('Image load error details:', {
+              originalUrl: finalUrl,
+              templateURL: templateURL,
+              paramObject: paramObject
+            });
             // Set fallback image
             this.src = 'https://smartimaging.scene7.com/is/image/DynamicMediaNA/WKND%20Template?wid=2000&hei=2000&qlt=100&fit=constrain'; // Replace with your fallback image path
             this.alt = 'Fallback image - template image not correctly authored';
