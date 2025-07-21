@@ -39,7 +39,7 @@ export default async function decorate(block) {
     // Prepare request configuration based on environment
     const requestConfig = isAuthor 
     ? {
-        url: `${aemauthorurl}${CONFIG.GRAPHQL_QUERY};path=${contentPath};ts=${Date.now()}`,
+        url: `${aemauthorurl}${CONFIG.GRAPHQL_QUERY};path=${contentPath};variation='master';ts=${Date.now()}`,
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       }
