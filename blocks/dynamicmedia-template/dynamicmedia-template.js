@@ -21,7 +21,7 @@ export default async function decorate(block) {
       GRAPHQL_QUERY: '/graphql/execute.json/lpbgenerated/GetBannerDetailsByVariation'
     };
     
-    const hostname = window.location.hostname;
+    const hostname = 'https://' + window.location.hostname;
     let aemauthorurl = '';
     if (hostname.includes('author-p')) {
       aemauthorurl = hostname;
