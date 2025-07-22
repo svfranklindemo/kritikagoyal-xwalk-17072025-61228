@@ -91,6 +91,7 @@ main .carousel div.carousel-text .button {
 /* Product Card Header Styling */
 main .carousel .slide {
   position: relative;
+  border: 1px solid #3ad57a !important;
 }
 
 main .carousel .slide::before {
