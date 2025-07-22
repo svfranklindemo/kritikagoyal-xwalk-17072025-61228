@@ -1,5 +1,24 @@
 main .carousel-container {
-  padding: 0;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background pattern */
+main .carousel-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px, 30px 30px;
+  background-position: 0 0, 25px 25px;
+  pointer-events: none;
 }
 
 main .carousel {
@@ -7,57 +26,232 @@ main .carousel {
   scroll-snap-type: x mandatory;
   overflow: scroll hidden;
   scroll-behavior: smooth;
-  max-width: 1680px;
+  max-width: 1400px;
   margin: auto;
+  padding: 0 20px;
+  gap: 20px;
 }
 
 main .carousel picture {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  box-sizing: border-box;
+  display: none; /* Hide background images for card design */
 }
 
 main .carousel img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  object-position: 90%;
+  display: none; /* Hide background images for card design */
 }
   
 main .carousel > div {
-  width: 100%;
+  width: 320px;
+  min-width: 320px;
   flex-shrink: 0;
   scroll-snap-align: start;
   position: relative;
-  min-height: 580px;
-  align-items: flex-end;
+  min-height: 400px;
   display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+main .carousel > div:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
 }
 
 main .carousel div.carousel-text {
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: white;
-  min-height: 188px;
-  padding: 0 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: white;
+  min-height: auto;
 }
 
 main .carousel div.carousel-text p {
-  margin: 10px 0 16px;
-  line-height: 1.2;
+  margin: 0;
+  line-height: 1.4;
+  font-size: 14px;
+  color: #333;
 }
 
 main .carousel div.carousel-text h2 {
   margin: 0;
-  margin-top: 16px; 
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
 }
 
 main .carousel div.carousel-text .button {
   margin: 0;
+}
+
+/* Product Card Header Styling */
+main .carousel .slide {
+  position: relative;
+}
+
+main .carousel .slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  z-index: 1;
+}
+
+/* Card Header Content */
+main .carousel .slide h2 {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  color: white;
+  padding: 16px 20px 8px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Badge styling */
+main .carousel .slide .badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 8px 20px;
+  text-align: center;
+}
+
+main .carousel .slide .badge.blue {
+  background: #3b82f6;
+  color: white;
+}
+
+main .carousel .slide .badge.black {
+  background: #1f2937;
+  color: white;
+}
+
+main .carousel .slide .badge.green {
+  background: #10b981;
+  color: white;
+}
+
+/* Card Content Area */
+main .carousel .slide .carousel-text {
+  padding: 20px;
+  background: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Data amount styling */
+main .carousel .slide .data-amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+/* Feature list styling */
+main .carousel .slide .features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+main .carousel .slide .features p {
+  margin: 0;
+  font-size: 14px;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Social media icons */
+main .carousel .slide .social-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+main .carousel .slide .social-icons img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Voucher styling */
+main .carousel .slide .voucher {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* Navigation arrow */
+main .carousel .nav-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: #10b981;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+main .carousel .nav-arrow:hover {
+  background: #059669;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  main .carousel {
+    padding: 0 16px;
+    gap: 16px;
+  }
+  
+  main .carousel > div {
+    width: 280px;
+    min-width: 280px;
+  }
+  
+  main .carousel .slide h2 {
+    font-size: 18px;
+    padding: 12px 16px 6px;
+  }
+  
+  main .carousel .slide .carousel-text {
+    padding: 16px;
+  }
+  
+  main .carousel .slide .data-amount {
+    font-size: 20px;
+  }
 }
   
 
@@ -71,24 +265,33 @@ main .carousel-wrapper {
 
 main .carousel-wrapper > :last-child {
   text-align: center;
-  margin-top: 0;
-  position: absolute;
+  margin-top: 20px;
+  position: relative;
   display: flex;
   right: 0;
   left: 0;
   justify-content: center;
+  z-index: 10;
 }
 
 main .carousel-wrapper > :last-child button {
   display: block;
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   padding: 0;
-  margin: 5px;
-  border-radius: 5px;
-  background-color: var(--highlight-background-color);
+  margin: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+main .carousel-wrapper > :last-child button:hover {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 main .carousel-wrapper > :last-child button.selected {
-  background-color: var(--link-color);
+  background-color: white;
+  transform: scale(1.2);
 }
