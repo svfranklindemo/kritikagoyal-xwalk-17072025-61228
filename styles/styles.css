@@ -277,6 +277,10 @@ img {
   main .section {
     padding: 64px 32px;
   }
+
+  main .section.dynamicmedia-template > div {
+    padding: none;
+  }
 }
 
 @media (min-width: 900px) {
@@ -292,6 +296,11 @@ img {
   .section > div {
     max-width: 1200px;
     margin: auto;
+  }
+  
+  /* Remove max-width constraint for dynamicmedia-template blocks */
+  .section.dynamicmedia-template > div {
+    max-width: none;
   }
 }
 
