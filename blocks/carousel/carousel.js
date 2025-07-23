@@ -76,6 +76,22 @@ export default function decorate(block) {
 
   block.querySelectorAll(':scope > div').forEach((slide) => slide.classList.add('slide'));
 
+  // Debug: Log carousel structure and image links
+  console.log('Carousel block:', block);
+  console.log('Carousel children:', block.children);
+  
+  const imageLinks = block.querySelectorAll('.carousel-image a');
+  console.log('Found image links:', imageLinks.length);
+  
+  imageLinks.forEach((link, index) => {
+    console.log(`Image link ${index}:`, {
+      href: link.getAttribute('href'),
+      textContent: link.textContent,
+      className: link.className,
+      parentElement: link.parentElement
+    });
+  });
+
   // Add navigation arrows
   const prevButton = document.createElement('button');
   prevButton.type = 'button';
