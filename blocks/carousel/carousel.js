@@ -10,7 +10,7 @@ export function updateButtons(activeSlide) {
 
 // Function to update active slides based on scroll position
 function updateActiveSlides(block) {
-  const slides = block.querySelectorAll(':scope > div');
+  const slides = block.children;
   const containerWidth = block.clientWidth;
   const scrollLeft = block.scrollLeft;
   
@@ -26,7 +26,7 @@ function updateActiveSlides(block) {
   let centerSlideIndex = 0;
   let minDistance = Infinity;
   
-  slides.forEach((slide, index) => {
+  [...slides].forEach((slide, index) => {
     const slideCenter = (index * totalSlideWidth) + (slideWidth / 2);
     const distance = Math.abs(visibleCenter - slideCenter);
     if (distance < minDistance) {
@@ -36,7 +36,7 @@ function updateActiveSlides(block) {
   });
   
   // Apply active/inactive classes based on position relative to center
-  slides.forEach((slide, index) => {
+  [...slides].forEach((slide, index) => {
     const distanceFromCenter = Math.abs(index - centerSlideIndex);
     
     if (distanceFromCenter <= 1) {
@@ -76,10 +76,6 @@ export default function decorate(block) {
 
   block.querySelectorAll(':scope > div').forEach((slide) => slide.classList.add('slide'));
 
-  // Get slides before adding navigation buttons
-  const slides = block.querySelectorAll(':scope > div');
-  const totalSlides = slides.length;
-
   // Add navigation arrows
   const prevButton = document.createElement('button');
   prevButton.type = 'button';
@@ -102,13 +98,13 @@ export default function decorate(block) {
   prevButton.innerHTML = arrowSVG;
   nextButton.innerHTML = arrowSVG;
   
-  // Add buttons to the carousel wrapper instead of the carousel itself
-  const carouselWrapper = block.closest('.carousel-wrapper');
-  carouselWrapper.appendChild(prevButton);
-  carouselWrapper.appendChild(nextButton);
+  block.appendChild(prevButton);
+  block.appendChild(nextButton);
   
   // Navigation functionality
   let currentIndex = 0;
+  const slides = block.children;
+  const totalSlides = slides.length;
   
   function goToSlide(index) {
     if (index < 0) index = 0;
@@ -146,16 +142,14 @@ export default function decorate(block) {
   }, { passive: true });
 
   block.addEventListener('scrollend', () => {
-    const activeElement = Math.round(block.scrollLeft / slides[0].clientWidth);
-    const slide = slides[activeElement];
-    if (slide) {
-      updateButtons(slide);
-      currentIndex = activeElement;
-    }
+    const activeElement = Math.round(block.scrollLeft / block.children[0].clientWidth);
+    const slide = block.children[activeElement];
+    updateButtons(slide);
+    currentIndex = activeElement;
     
     // Update navigation button states
-    prevButton.disabled = currentIndex === 0;
-    nextButton.disabled = currentIndex >= totalSlides - 3;
+    prevButton.disabled = activeElement === 0;
+    nextButton.disabled = activeElement >= totalSlides - 3;
     
     // Final update of active slides
     updateActiveSlides(block);
