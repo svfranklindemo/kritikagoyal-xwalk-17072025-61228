@@ -1,3 +1,20 @@
 .dynamicmedia-template-wrapper{
     text-align : center;
 }
+
+/* Remove section padding and max-width constraints for dynamicmedia-template */
+main .section.dynamicmedia-template-container {
+  padding: 0;
+}
+
+main .section.dynamicmedia-template-container > div {
+  max-width: unset;
+  margin: 0;
+}
+
+/* Ensure images in dynamicmedia-template can display at full width */
+main .section.dynamicmedia-template-container img {
+  max-width: none;
+  width: 100%;
+  height: auto;
+}
