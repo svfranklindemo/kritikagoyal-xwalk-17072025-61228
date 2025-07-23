@@ -26,10 +26,11 @@ main .carousel {
   scroll-snap-type: x mandatory;
   overflow: scroll hidden;
   scroll-behavior: smooth;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
-  padding: 0 20px;
+  padding: 0 60px;
   gap: 20px;
+  position: relative;
 }
 
 main .carousel picture {
@@ -51,9 +52,24 @@ main .carousel > div {
   flex-direction: column;
   background: white;
   border-radius: 16px;
+  border: 1px solid #3ad57a !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+/* Active slide styling - show 3 slides at once */
+main .carousel > div:nth-child(n+1):nth-child(-n+3) {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Slides outside the active range */
+main .carousel > div:nth-child(n+4) {
+  opacity: 0.4;
+  transform: scale(0.85);
 }
 
 main .carousel > div:hover {
@@ -204,35 +220,47 @@ main .carousel .slide .voucher {
   margin-top: auto;
 }
 
-/* Navigation arrow */
-main .carousel .nav-arrow {
+/* Navigation arrows */
+main .carousel .carousel-nav {
   position: absolute;
-  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
-  background: #10b981;
+  background: transparent;
   border: none;
-  border-radius: 50%;
-  color: white;
-  font-size: 18px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 10;
-  transition: background-color 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
-main .carousel .nav-arrow:hover {
-  background: #059669;
+main .carousel .carousel-prev {
+  left: 10px;
+}
+
+main .carousel .carousel-next {
+  right: 10px;
+}
+
+main .carousel .carousel-nav:hover {
+  opacity: 0.8;
+}
+
+main .carousel .carousel-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Arrow SVG styling */
+main .carousel .carousel-nav svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   main .carousel {
-    padding: 0 16px;
+    padding: 0 40px;
     gap: 16px;
   }
   
@@ -252,6 +280,19 @@ main .carousel .nav-arrow:hover {
   
   main .carousel .slide .data-amount {
     font-size: 20px;
+  }
+  
+  main .carousel .carousel-nav {
+    width: 32px;
+    height: 32px;
+  }
+  
+  main .carousel .carousel-prev {
+    left: 5px;
+  }
+  
+  main .carousel .carousel-next {
+    right: 5px;
   }
 }
   
