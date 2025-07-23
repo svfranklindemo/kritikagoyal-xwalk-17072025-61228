@@ -95,7 +95,8 @@ h4, h5, h6 {
 }
 
 h1 {
-  font-weight: 400;
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
   margin-top: 27px;
   margin-bottom: 13.5px;
   font-size: var(--heading-font-size-xxl);
