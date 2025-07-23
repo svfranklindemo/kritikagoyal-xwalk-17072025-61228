@@ -223,7 +223,11 @@ main .carousel .slide .voucher {
 }
 
 /* Navigation arrows */
-main .carousel .carousel-nav {
+main .carousel-wrapper {
+  position: relative;
+}
+
+main .carousel-wrapper .carousel-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -236,25 +240,25 @@ main .carousel .carousel-nav {
   transition: opacity 0.3s ease;
 }
 
-main .carousel .carousel-prev {
+main .carousel-wrapper .carousel-prev {
   left: 10px;
 }
 
-main .carousel .carousel-next {
+main .carousel-wrapper .carousel-next {
   right: 10px;
 }
 
-main .carousel .carousel-nav:hover {
+main .carousel-wrapper .carousel-nav:hover {
   opacity: 0.8;
 }
 
-main .carousel .carousel-nav:disabled {
+main .carousel-wrapper .carousel-nav:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
 /* Arrow SVG styling */
-main .carousel .carousel-nav svg {
+main .carousel-wrapper .carousel-nav svg {
   width: 100%;
   height: 100%;
 }
@@ -284,16 +288,16 @@ main .carousel .carousel-nav svg {
     font-size: 20px;
   }
   
-  main .carousel .carousel-nav {
+  main .carousel-wrapper .carousel-nav {
     width: 32px;
     height: 32px;
   }
   
-  main .carousel .carousel-prev {
+  main .carousel-wrapper .carousel-prev {
     left: 5px;
   }
   
-  main .carousel .carousel-next {
+  main .carousel-wrapper .carousel-next {
     right: 5px;
   }
 }
