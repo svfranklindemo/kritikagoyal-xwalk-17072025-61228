@@ -38,6 +38,19 @@ main .carousel .carousel-image {
   justify-content: center;
 }
 
+/* Handle image links in carousel */
+main .carousel .carousel-image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  color: transparent;
+  min-height: 100%;
+}
+
 main .carousel img {
   object-fit: cover;
   width: 100%;
