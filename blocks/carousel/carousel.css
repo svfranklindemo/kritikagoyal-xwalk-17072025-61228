@@ -21,63 +21,15 @@ main .carousel-container::before {
   pointer-events: none;
 }
 
-/* Slick slider container */
-main .carousel.slick-slider {
-  position: relative;
-  max-width: 1200px;
+main .carousel {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow: scroll hidden;
+  scroll-behavior: smooth;
+  max-width: 1400px;
   margin: auto;
-  padding: 0 60px;
-}
-
-/* Slick list wrapper */
-main .carousel .slick-list {
-  overflow: hidden;
-  position: relative;
-}
-
-/* Slick track */
-main .carousel .slick-track {
-  display: flex;
-  transition: transform 0.3s ease;
-}
-
-/* Individual slides */
-main .carousel .offer-item {
-  width: 320px;
-  min-width: 320px;
-  flex-shrink: 0;
-  position: relative;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: 16px;
-  border: 1px solid #3ad57a !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: all 0.3s ease;
-  margin: 0 10px;
-  opacity: 0.6;
-  transform: scale(0.9);
-}
-
-/* Active slide styling */
-main .carousel .offer-item.slick-current {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
-}
-
-/* Slick slides */
-main .carousel .slick-slide {
-  opacity: 0.6;
-  transform: scale(0.9);
-  transition: all 0.3s ease;
-}
-
-main .carousel .slick-slide.slick-active {
-  opacity: 1;
-  transform: scale(1);
+  padding: 0 20px;
+  gap: 20px;
 }
 
 main .carousel picture {
@@ -193,165 +145,113 @@ main .carousel .slide .badge.green {
   color: white;
 }
 
-/* Offer item content structure */
-main .carousel .offer-item {
+/* Card Content Area */
+main .carousel .slide .carousel-text {
   padding: 20px;
-  text-align: center;
-}
-
-/* Title logo */
-main .carousel .offer-item .title-logo {
-  max-width: 200px;
-  height: auto;
-  margin: 0 auto 16px;
-  display: block;
-}
-
-/* Badge styling for offer items */
-main .carousel .offer-item h3.with {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  margin: 8px 0;
-  text-align: center;
-}
-
-main .carousel .offer-item h3.with.fb {
-  background: #3b82f6;
-  color: white;
-}
-
-main .carousel .offer-item h3.with.tiktok {
-  background: #1f2937;
-  color: white;
-}
-
-main .carousel .offer-item h3.with.unli5g {
-  background: #10b981;
-  color: white;
-  margin-top: 8px;
-}
-
-/* Inclusions container */
-main .carousel .offer-item .inclusions {
-  margin-top: 16px;
+  background: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* Data amount styling */
-main .carousel .offer-item .data {
+main .carousel .slide .data-amount {
   font-size: 24px;
   font-weight: 700;
   color: #1f2937;
-  margin: 16px 0;
+  margin: 0;
 }
 
-main .carousel .offer-item .data span {
-  color: #3ad57a;
+/* Feature list styling */
+main .carousel .slide .features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* Apps/inclusions styling */
-main .carousel .offer-item .apps {
-  margin: 12px 0;
-}
-
-main .carousel .offer-item .apps p {
-  margin: 0 0 8px 0;
+main .carousel .slide .features p {
+  margin: 0;
   font-size: 14px;
   color: #4b5563;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-main .carousel .offer-item .apps img {
-  max-width: 120px;
-  height: auto;
-  margin: 0 auto;
+/* Social media icons */
+main .carousel .slide .social-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+main .carousel .slide .social-icons img {
+  width: 20px;
+  height: 20px;
   display: block;
 }
 
 /* Voucher styling */
-main .carousel .offer-item .apps p .viu {
-  color: #f59e0b;
+main .carousel .slide .voucher {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
   font-weight: 600;
-}
-
-/* Text center utility */
-main .carousel .offer-item .text-center {
   text-align: center;
+  margin-top: auto;
 }
 
-main .carousel .offer-item .text-color-black {
-  color: #1f2937;
-}
-
-/* Navigation arrows */
-main .carousel .slick-arrow {
+/* Navigation arrow */
+main .carousel .nav-arrow {
   position: absolute;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
-  background: transparent;
+  background: #10b981;
   border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 10;
-  transition: opacity 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-main .carousel .slick-prev {
-  left: 10px;
-}
-
-main .carousel .slick-next {
-  right: 10px;
-}
-
-main .carousel .slick-arrow:hover {
-  opacity: 0.8;
-}
-
-main .carousel .slick-arrow[aria-disabled="true"] {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* Arrow SVG styling */
-main .carousel .slick-arrow svg {
-  width: 100%;
-  height: 100%;
+main .carousel .nav-arrow:hover {
+  background: #059669;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-  main .carousel.slick-slider {
-    padding: 0 40px;
+  main .carousel {
+    padding: 0 16px;
+    gap: 16px;
   }
   
-  main .carousel .offer-item {
+  main .carousel > div {
     width: 280px;
     min-width: 280px;
   }
   
-  main .carousel .offer-item .title-logo {
-    max-width: 160px;
+  main .carousel .slide h2 {
+    font-size: 18px;
+    padding: 12px 16px 6px;
   }
   
-  main .carousel .offer-item .data {
+  main .carousel .slide .carousel-text {
+    padding: 16px;
+  }
+  
+  main .carousel .slide .data-amount {
     font-size: 20px;
-  }
-  
-  main .carousel .slick-arrow {
-    width: 32px;
-    height: 32px;
-  }
-  
-  main .carousel .slick-prev {
-    left: 5px;
-  }
-  
-  main .carousel .slick-next {
-    right: 5px;
   }
 }
   
@@ -364,38 +264,35 @@ main .carousel-wrapper {
   max-width: unset;
 }
 
-/* Slick dots navigation */
-main .carousel .slick-dots {
+main .carousel-wrapper > :last-child {
+  text-align: center;
+  margin-top: 20px;
+  position: relative;
   display: flex;
+  right: 0;
+  left: 0;
   justify-content: center;
-  align-items: center;
-  list-style: none;
-  margin: 20px 0 0 0;
-  padding: 0;
-  gap: 8px;
+  z-index: 10;
 }
 
-main .carousel .slick-dots li {
-  margin: 0;
-}
-
-main .carousel .slick-dots button {
-  width: 8px;
+main .carousel-wrapper > :last-child button {
+  display: block;
   height: 8px;
+  width: 8px;
+  padding: 0;
+  margin: 4px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.3);
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0;
-  padding: 0;
+  transition: background-color 0.3s ease;
 }
 
-main .carousel .slick-dots button:hover {
+main .carousel-wrapper > :last-child button:hover {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-main .carousel .slick-dots .slick-active button {
+main .carousel-wrapper > :last-child button.selected {
   background-color: white;
   transform: scale(1.2);
 }
