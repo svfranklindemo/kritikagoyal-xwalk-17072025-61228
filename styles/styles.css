@@ -273,6 +273,14 @@ img {
   height: auto;
 }
 
+/* Target images in sections with small-image class */
+.small-image img {
+  max-width: none !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: none !important;
+}
+
 @media (min-width: 600px) {
   main .section {
     padding: 64px 32px;
