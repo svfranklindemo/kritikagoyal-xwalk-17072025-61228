@@ -8,6 +8,49 @@ export function updateButtons(activeSlide) {
   button.classList.add('selected');
 }
 
+// Function to update active slides based on scroll position
+function updateActiveSlides(block) {
+  const slides = block.children;
+  const containerWidth = block.clientWidth;
+  const scrollLeft = block.scrollLeft;
+  
+  // Calculate which slides are in the active area (3 slides visible)
+  const slideWidth = slides[0].offsetWidth;
+  const gap = 20; // Gap between slides
+  const totalSlideWidth = slideWidth + gap;
+  
+  // Calculate the center of the visible area
+  const visibleCenter = scrollLeft + (containerWidth / 2);
+  
+  // Find which slide is closest to the center
+  let centerSlideIndex = 0;
+  let minDistance = Infinity;
+  
+  [...slides].forEach((slide, index) => {
+    const slideCenter = (index * totalSlideWidth) + (slideWidth / 2);
+    const distance = Math.abs(visibleCenter - slideCenter);
+    if (distance < minDistance) {
+      minDistance = distance;
+      centerSlideIndex = index;
+    }
+  });
+  
+  // Apply active/inactive classes based on position relative to center
+  [...slides].forEach((slide, index) => {
+    const distanceFromCenter = Math.abs(index - centerSlideIndex);
+    
+    if (distanceFromCenter <= 1) {
+      // Active slides (center slide and adjacent ones)
+      slide.classList.add('active-slide');
+      slide.classList.remove('inactive-slide');
+    } else {
+      // Inactive slides
+      slide.classList.add('inactive-slide');
+      slide.classList.remove('active-slide');
+    }
+  });
+}
+
 export default function decorate(block) {
   const buttons = document.createElement('div');
   [...block.children].forEach((row, i) => {
@@ -69,13 +112,20 @@ export default function decorate(block) {
     
     currentIndex = index;
     const slideWidth = slides[0].offsetWidth;
-    const translateX = -index * slideWidth;
+    const gap = 20;
+    const totalSlideWidth = slideWidth + gap;
+    const translateX = index * totalSlideWidth;
     
     block.scrollTo({ top: 0, left: translateX, behavior: 'smooth' });
     
     // Update button states
     prevButton.disabled = index === 0;
     nextButton.disabled = index >= totalSlides - 3; // Show 3 slides at once
+    
+    // Update active slides after a short delay to allow scroll to complete
+    setTimeout(() => {
+      updateActiveSlides(block);
+    }, 100);
   }
   
   // Event listeners for navigation
@@ -84,6 +134,12 @@ export default function decorate(block) {
   
   // Initialize
   goToSlide(0);
+  updateActiveSlides(block);
+
+  // Add scroll event listener for real-time updates
+  block.addEventListener('scroll', () => {
+    updateActiveSlides(block);
+  }, { passive: true });
 
   block.addEventListener('scrollend', () => {
     const activeElement = Math.round(block.scrollLeft / block.children[0].clientWidth);
@@ -94,5 +150,8 @@ export default function decorate(block) {
     // Update navigation button states
     prevButton.disabled = activeElement === 0;
     nextButton.disabled = activeElement >= totalSlides - 3;
+    
+    // Final update of active slides
+    updateActiveSlides(block);
   }, { passive: true });
 }

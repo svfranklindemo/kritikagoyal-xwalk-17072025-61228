@@ -60,16 +60,18 @@ main .carousel > div {
   transform: scale(0.9);
 }
 
-/* Active slide styling - show 3 slides at once */
-main .carousel > div:nth-child(n+1):nth-child(-n+3) {
+/* Active slides styling */
+main .carousel > div.active-slide {
   opacity: 1;
   transform: scale(1);
+  z-index: 2;
 }
 
-/* Slides outside the active range */
-main .carousel > div:nth-child(n+4) {
+/* Inactive slides styling */
+main .carousel > div.inactive-slide {
   opacity: 0.4;
   transform: scale(0.85);
+  z-index: 1;
 }
 
 main .carousel > div:hover {
