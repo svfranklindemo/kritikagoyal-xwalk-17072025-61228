@@ -106,7 +106,7 @@ export default async function decorate(block) {
 
         console.log("Template URL:", templateURL);
 
-        finalUrl = finalUrl + '&$price_font_size=150&$price_font_color=%5Cred255%5Cgreen255%5Cblue252%3B&data_font_size=186&$data_font_color=%5Cred255%5Cgreen255%5Cblue255%3B&$validity_font_size=60&$validity_font_color=%5Cred255%5Cgreen255%5Cblue255';
+        finalUrl = finalUrl + '&$price_font_size=150&$price_font_color=%5Cred255%5Cgreen255%5Cblue252%3B&data_font_size=186&$data_font_color=%5Cred255%5Cgreen255%5Cblue255%3B&$validity_font_size=60&$validity_font_color=%5Cred255%5Cgreen255%5Cblue255%3B';
 
         console.log("Final URL:", finalUrl);
 
