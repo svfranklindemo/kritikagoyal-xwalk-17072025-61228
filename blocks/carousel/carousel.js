@@ -76,41 +76,7 @@ export default function decorate(block) {
 
   block.querySelectorAll(':scope > div').forEach((slide) => slide.classList.add('slide'));
 
-  // Debug: Log carousel structure and image links
-  console.log('Carousel block:', block);
-  console.log('Carousel children:', block.children);
-  
-  // Check each slide for different possible structures
-  [...block.children].forEach((slide, slideIndex) => {
-    console.log(`Slide ${slideIndex}:`, slide);
-    console.log(`Slide ${slideIndex} HTML:`, slide.innerHTML);
-    
-    // Check for different possible image selectors
-    const buttonContainer = slide.querySelector('.button-container');
-    const carouselImage = slide.querySelector('.carousel-image');
-    const anyLinks = slide.querySelectorAll('a');
-    
-    console.log(`Slide ${slideIndex} - button-container:`, buttonContainer);
-    console.log(`Slide ${slideIndex} - carousel-image:`, carouselImage);
-    console.log(`Slide ${slideIndex} - all links:`, anyLinks);
-    
-    if (anyLinks.length > 0) {
-      anyLinks.forEach((link, linkIndex) => {
-        console.log(`Slide ${slideIndex} Link ${linkIndex}:`, {
-          href: link.getAttribute('href'),
-          textContent: link.textContent,
-          className: link.className,
-          parentElement: link.parentElement.className
-        });
-      });
-    }
-  });
-  
-  const imageLinks = block.querySelectorAll('.carousel-image a');
-  console.log('Found image links with .carousel-image a:', imageLinks.length);
-  
-  const allLinks = block.querySelectorAll('a');
-  console.log('Found all links:', allLinks.length);
+
 
   // Add navigation arrows
   const prevButton = document.createElement('button');

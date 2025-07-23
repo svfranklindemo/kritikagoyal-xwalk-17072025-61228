@@ -20,13 +20,10 @@ main .carousel {
 }
 
 main .carousel picture {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 main .carousel .carousel-image {
@@ -36,6 +33,7 @@ main .carousel .carousel-image {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 /* Handle image links in carousel */
@@ -56,6 +54,7 @@ main .carousel img {
   width: 100%;
   height: 100%;
   object-position: center;
+  display: block;
 }
   
 main .carousel > div {
