@@ -140,7 +140,6 @@ main .carousel .slide::before {
   left: 0;
   right: 0;
   height: 80px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
   z-index: 1;
 }
 
@@ -148,7 +147,6 @@ main .carousel .slide::before {
 main .carousel .slide h2 {
   position: relative;
   z-index: 2;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
   color: white;
   padding: 16px 20px 8px;
   margin: 0;
