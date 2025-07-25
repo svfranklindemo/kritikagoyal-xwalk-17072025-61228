@@ -73,7 +73,7 @@ export default async function decorate(block) {
   
         const offer = await response.json();
         // Get the template URL and parameter mappings
-        const templateURL = offer?.data?.dynamicMediaTemplateByPath?.item?.dm_template;
+        const templateURL = offer?.data?.dynamicMediaTemplateByPath?.item?.desktop_dm_template;
         const paramPairs = offer?.data?.dynamicMediaTemplateByPath?.item?.var_mapping;
 
         // Create parameter object
