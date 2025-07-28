@@ -29,7 +29,7 @@ export default async function decorate(block) {
       aemauthorurl = hostname?.replace('publish', 'author')?.replace(/\/$/, '');
     }
     
-    const aempublishurl = hostname?.replace('author', 'publish')?.replace(/\/$/, '');  
+    const aempublishurl = 'https://publish-p107529-e1006538.adobeaemcloud.com';
     
     const persistedquery = '/graphql/execute.json/lpbgenerated/GetBannerDetailsByVariation';
 
