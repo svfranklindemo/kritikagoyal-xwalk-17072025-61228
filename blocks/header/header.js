@@ -432,6 +432,9 @@ export default async function decorate(block) {
     navURL = `${getSiteRoot(6)}${navPath}.plain.html`;
   }
   let updatedNavUrl = navURL.replace(/about-us\/|faqs\/|magazine\/.+\/|adventures\/.+\//g, "/");
+  if (!updatedNavUrl.includes('/us/en')){
+    updatedNavUrl = updatedNavUrl.replace('/nav.plain.html', '/us/en/nav.plain.html');
+  }
 
   const resp = await fetch(updatedNavUrl.replace("//", "/"), window.location.pathname.endsWith('/nav') ? { cache: 'reload' } : {});
   if (resp.ok) {
