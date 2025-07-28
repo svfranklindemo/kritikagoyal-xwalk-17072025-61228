@@ -56,10 +56,13 @@ export default async function decorate(block) {
   
       try {
         // Fetch data
-        const response = await fetch(requestConfig.url, {
-          method: requestConfig.method,
-          headers: requestConfig.headers,
-          ...(requestConfig.body && { body: requestConfig.body })
+        const response = await fetch('https://author-p107529-e1006538.adobeaemcloud.com/graphql/execute.json/lpbgenerated/GetBannerDetailsByVariation', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + btoa('lpbsuperuser:adobe@123'),
+            'Cookie': 'affinity="12d9de93c22e0369"; cq-authoring-mode=TOUCH'
+          }
         });
   
         if (!response.ok) {
