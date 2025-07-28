@@ -56,14 +56,7 @@ export default async function decorate(block) {
   
       try {
         // Fetch data
-        const response = await fetch('https://author-p107529-e1006538.adobeaemcloud.com/graphql/execute.json/lpbgenerated/GetBannerDetailsByVariation', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Basic ' + btoa('lpbsuperuser:adobe@123'),
-            'Cookie': 'affinity="12d9de93c22e0369"; cq-authoring-mode=TOUCH'
-          }
-        });
+        const response = await fetch('https://prod-93.westus.logic.azure.com/workflows/7a1c7ba2afc440698d7360f266b7bea8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4fwvfQP80z3kgGchdkXOam7aJTGJelIeKljrXwdzsSQ');
   
         if (!response.ok) {
           console.error(`error making cf graphql request:${response.status}`, {
