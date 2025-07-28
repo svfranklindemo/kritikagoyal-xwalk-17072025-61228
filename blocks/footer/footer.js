@@ -16,6 +16,9 @@ export default async function decorate(block) {
     footerURL = `${getSiteRoot(6)}${navPath}.plain.html`;
   }
   let updatedFooterUrl = footerURL.replace(/about-us\/|faqs\/|index-demo\/|magazine\/.+\/|adventures\/.+\//g, "/");
+  if (!updatedFooterUrl.includes('/us/en')){
+    updatedFooterUrl = updatedFooterUrl.replace('/footer.plain.html', '/us/en/footer.plain.html');
+  }
 
   const resp = await fetch(updatedFooterUrl.replace("//", "/"), window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
 
