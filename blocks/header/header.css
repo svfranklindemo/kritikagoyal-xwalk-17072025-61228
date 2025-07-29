@@ -548,3 +548,16 @@ header nav .nav-sections > ul > li[aria-expanded="true"] > ul > li > span.icon {
     padding: 16px;
   }
 }
+@media (max-width: 767px){
+header nav {
+  max-width: 900px;
+  gap: 0 0em;
+  }
+  .nav-brand {
+    width: 100px;
+    padding-top: 10px;
+  }
+  .nav-login {
+    visibility: hidden;
+  }
+}
