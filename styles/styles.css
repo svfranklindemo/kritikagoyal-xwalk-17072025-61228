@@ -397,3 +397,32 @@ main .section[data-section-status='initialized'] {
 .hlx-preview-overlay .hlx-badge .hlx-popup * {
   font-size: 14px;
 }
+
+.cc-window.cc-floating.cc-type-opt-in.cc-theme-block.cc-bottom {
+  background: gray;
+  
+}
+/*responsive*/
+@media (max-width: 767px){
+  .small-image img {
+      width: 100% !important;
+      object-fit: unset !important;
+  }
+  main .section {
+    padding:25px 30px;
+  }
+
+.columns-wrapper picture {
+  justify-content: center;
+  display: flex;
+}
+
+  .columns img {
+    width: 85%;
+  }
+  main .carousel-wrapper {
+    padding: 25px !important;
+}
+
+}
+
