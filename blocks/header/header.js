@@ -429,14 +429,13 @@ export default async function decorate(block) {
 
   let navURL = "/us/en/nav.plain.html";
   if(window.location.href.includes('author') || window.location.href.includes('publish')){
-    navURL = `${getSiteRoot(6)}${navPath}.plain.html`;
+    navURL = `${getSiteRoot(3)}${navPath}.plain.html`;
   }
-  let updatedNavUrl = "nav.plain.html";
-    /*navURL.replace(/about-us\/|faqs\/|magazine\/.+\/|adventures\/.+\//g, "/");
+  let updatedNavUrl = navURL.replace(/about-us\/|faqs\/|magazine\/.+\/|adventures\/.+\//g, "/");
   if (!updatedNavUrl.includes('/us/en')){
     updatedNavUrl = updatedNavUrl.replace('/nav.plain.html', '/us/en/nav.plain.html');
-  }*/
-
+  }
+  
   const resp = await fetch(updatedNavUrl.replace("//", "/"), window.location.pathname.endsWith('/nav') ? { cache: 'reload' } : {});
   if (resp.ok) {
     const html = await resp.text();
