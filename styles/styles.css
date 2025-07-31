@@ -310,6 +310,10 @@ img {
     max-width: 1200px;
     margin: auto;
   }
+
+  .section > div.teaser-wrapper {
+    margin: auto;
+  }
 }
 
 main .section.highlight {
