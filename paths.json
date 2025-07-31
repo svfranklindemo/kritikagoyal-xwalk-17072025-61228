@@ -1,6 +1,7 @@
 {
   "mappings": [
     "/content/kritikagoyal/pldt/us/en/:/",
+    "/content/kritikagoyal/pldt/us/en:/",
     "/content/kritikagoyal/pldt/configuration:/.helix/config.json",
     "/content/kritikagoyal/pldt/metadata.json:/metadata.json",
     "/content/kritikagoyal/pldt/redirects.json:/redirects.json"
