@@ -11,7 +11,7 @@ export default async function decorate(block) {
   const navPath = footerMeta ? new URL(footerMeta, window.location).pathname : (window.wknd.demoConfig.demoBase || '/footer');
   const footerPath = footerMeta ? new URL(footerMeta).pathname : '/footer';
 
-  let footerURL = `${getSiteRoot(3)}${navPath}.plain.html`;
+  let footerURL = "/us/en/footer.plain.html";
   if(window.location.href.includes('author') || window.location.href.includes('publish')){
     footerURL = `${getSiteRoot(6)}${navPath}.plain.html`;
   }

@@ -427,7 +427,7 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : (window.wknd.demoConfig.demoBase || '/nav');
 
-  let navURL = `${getSiteRoot(3)}${navPath}.plain.html`;
+  let navURL = "/us/en/nav.plain.html";
   if(window.location.href.includes('author') || window.location.href.includes('publish')){
     navURL = `${getSiteRoot(6)}${navPath}.plain.html`;
   }
