@@ -5,6 +5,7 @@
     "/content/kritikagoyal/pldt/redirects.json:/redirects.json"
   ],
   "includes": [
-    "/content/kritikagoyal/pldt"
+    "/content/kritikagoyal/pldt",
+    "/content/dam/kritikagoyal"
   ]
 }
