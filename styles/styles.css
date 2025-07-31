@@ -244,6 +244,11 @@ main input:hover {
   border: 1px solid var(--text-color);
 }
 
+.section > div.teaser-wrapper {
+  margin: auto;
+  max-width: max-content;
+}
+
 /* stylelint-disable no-descending-specificity */
 main .section {
   padding: 64px 16px;
