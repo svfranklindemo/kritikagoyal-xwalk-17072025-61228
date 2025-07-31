@@ -3,5 +3,8 @@
     "/content/kritikagoyal/pldt/us/en/:/",
     "/content/kritikagoyal/pldt/metadata.json:/metadata.json",
     "/content/kritikagoyal/pldt/redirects.json:/redirects.json"
+  ],
+  "includes": [
+    "/content/kritikagoyal/pldt"
   ]
 }
