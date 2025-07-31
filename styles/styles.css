@@ -318,7 +318,11 @@ img {
 
   .section > div.teaser-wrapper {
     margin: auto;
-    max-width: max-content;
+    max-width: max-content
+  }
+
+  .teaser-container {
+    padding: 0;
   }
 }
 
