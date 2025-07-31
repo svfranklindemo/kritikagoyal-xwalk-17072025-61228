@@ -13,7 +13,7 @@ export default async function decorate(block) {
 
   let footerURL = `${getSiteRoot(3)}${navPath}.plain.html`;
   if(window.location.href.includes('author') || window.location.href.includes('publish')){
-    footerURL = `${getSiteRoot(6)}${navPath}.plain.html`;
+    footerURL = `${getSiteRoot(3)}${navPath}.plain.html`;
   }
   let updatedFooterUrl = footerURL.replace(/about-us\/|faqs\/|index-demo\/|magazine\/.+\/|adventures\/.+\//g, "/");
   if (!updatedFooterUrl.includes('/us/en')){
