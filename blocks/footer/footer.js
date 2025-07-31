@@ -11,12 +11,13 @@ export default async function decorate(block) {
   const navPath = footerMeta ? new URL(footerMeta, window.location).pathname : (window.wknd.demoConfig.demoBase || '/footer');
   const footerPath = footerMeta ? new URL(footerMeta).pathname : '/footer';
 
-  let footerURL = "/us/en/footer.plain.html";
+  let footerURL = `${getSiteRoot(3)}${navPath}.plain.html`;
   if(window.location.href.includes('author') || window.location.href.includes('publish')){
     footerURL = `${getSiteRoot(6)}${navPath}.plain.html`;
   }
   let updatedFooterUrl = footerURL.replace(/about-us\/|faqs\/|index-demo\/|magazine\/.+\/|adventures\/.+\//g, "/");
   if (!updatedFooterUrl.includes('/us/en')){
+    // update footeRUrl to append /us/en before /footer.plain.html
     updatedFooterUrl = updatedFooterUrl.replace('/footer.plain.html', '/us/en/footer.plain.html');
   }
 
