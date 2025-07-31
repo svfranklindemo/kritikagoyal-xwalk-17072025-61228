@@ -313,6 +313,7 @@ img {
 
   .section > div.teaser-wrapper {
     margin: auto;
+    max-width: max-content;
   }
 }
 
