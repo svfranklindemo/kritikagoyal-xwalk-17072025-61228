@@ -91,20 +91,53 @@ const loadScript = (url, callback, type) => {
     const placeholder = block.querySelector('picture');
     var link = block.querySelector('a').href;
 
-    const response = await fetch('https://prod-182.westus.logic.azure.com:443/workflows/47a46138a72940c7a1092a514555c9f3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OikX85Ks871i2TtDzGCuX3ctSkVRAOB2LWJ1yGQvDr8');
-  
-    if (!response.ok) {
-      console.error(`error making xf request:${response.status}`, {
-        error: error.message,
-        stack: error.stack
-      });
-      block.innerHTML = '';
-      return;
-    }
-    console.log(response);
+    try {
+      const response = await fetch('https://prod-182.westus.logic.azure.com:443/workflows/47a46138a72940c7a1092a514555c9f3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OikX85Ks871i2TtDzGCuX3ctSkVRAOB2LWJ1yGQvDr8');
+    
+      if (!response.ok) {
+        console.error(`error making xf request: ${response.status}`, {
+          status: response.status,
+          statusText: response.statusText
+        });
+        // Fall back to original embed logic
+        if (placeholder) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'embed-placeholder';
+          wrapper.innerHTML = '<div class="embed-placeholder-play"><button type="button" title="Play"></button></div>';
+          wrapper.prepend(placeholder);
+          wrapper.addEventListener('click', () => {
+            loadEmbed(block, link, true);
+          });
+          block.append(wrapper);
+        } else {
+          const observer = new IntersectionObserver((entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              observer.disconnect();
+              loadEmbed(block, link);         
+            }
+          });
+          observer.observe(block);
+        }
+        return;
+      }
 
-    block.innerHTML = response.data.embed.html;
-          
+      const data = await response.json();
+      console.log('Response data:', data);
+
+      // Check if the response contains embed HTML
+      if (data && data.embed && data.embed.html) {
+        block.innerHTML = data.embed.html;
+        block.classList.add('embed-is-loaded');
+        return;
+      } else {
+        console.warn('No embed HTML found in response, falling back to original logic');
+      }
+    } catch (error) {
+      console.error('Error fetching embed data:', error);
+      // Fall back to original embed logic
+    }
+
+    // Original embed logic as fallback
     block.textContent = '';
   
     if (placeholder) {
