@@ -3,7 +3,7 @@
 const AEM_HOST = checkDomain()
 
 function checkDomain(){
-  return "https://prod-141.westus.logic.azure.com:443/workflows/ea3e538f401f450ab7ff7efc435a6d4b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=f4Vv82SF_0mwHiOEIie_18yx1m0taW6ZPuCqu-qHdNw"    
+  return "https://publish-p121371-e1189853.adobeaemcloud.com/"    
 }
 
 export default function decorate(block) {
@@ -21,7 +21,7 @@ export default function decorate(block) {
   quoteDiv.replaceWith(adventureDiv);
 
 
-fetch(AEM_HOST + '/graphql/execute.json/lpbgenerated/HomeBannerCF')
+fetch('https://prod-141.westus.logic.azure.com/workflows/ea3e538f401f450ab7ff7efc435a6d4b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=f4Vv82SF_0mwHiOEIie_18yx1m0taW6ZPuCqu-qHdNw')
 .then(response => response.json())
 .then(response => {
 
