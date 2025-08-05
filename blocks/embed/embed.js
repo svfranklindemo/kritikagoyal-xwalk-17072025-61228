@@ -101,6 +101,7 @@ const loadScript = (url, callback, type) => {
       block.innerHTML = '';
       return;
     }
+    console.log(response);
 
     block.innerHTML = response.data.embed.html;
           
