@@ -16,15 +16,14 @@ export default async function decorate(block) {
       return;
     }
 
-    const data = await response.json();
-    console.log('Logic App response data:', data);
+    const htmlContent = await response.text();
+    console.log('Logic App response:', htmlContent);
 
-    // Check if the response contains embed HTML
-    if (data && data.embed && data.embed.html) {
-      block.innerHTML = data.embed.html;
+    if (htmlContent && htmlContent.trim()) {
+      block.innerHTML = htmlContent;
       block.classList.add('embed-is-loaded');
     } else {
-      console.warn('No embed HTML found in Logic App response');
+      console.warn('Empty response from Logic App');
       block.innerHTML = '<p>No content available</p>';
     }
   } catch (error) {
