@@ -87,9 +87,22 @@ const loadScript = (url, callback, type) => {
     block.classList.add('embed-is-loaded');
   };
   
-  export default function decorate(block) {
+  export default async function decorate(block) {
     const placeholder = block.querySelector('picture');
     var link = block.querySelector('a').href;
+
+    const response = await fetch('https://prod-182.westus.logic.azure.com:443/workflows/47a46138a72940c7a1092a514555c9f3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OikX85Ks871i2TtDzGCuX3ctSkVRAOB2LWJ1yGQvDr8');
+  
+    if (!response.ok) {
+      console.error(`error making xf request:${response.status}`, {
+        error: error.message,
+        stack: error.stack
+      });
+      block.innerHTML = '';
+      return;
+    }
+
+    block.innerHTML = response.data.embed.html;
           
     block.textContent = '';
   
