@@ -119,8 +119,13 @@ section:nth-child(8) p {
 
 img {
   width: 1200px;
-  height: 160px;
-  border-radius: 12px;
+}
+
+.section.content-fragment-container {
+  img {
+    height: 160px;
+    border-radius: 12px;
+  }
 }
 
 .content-fragment-wrapper h3 {
