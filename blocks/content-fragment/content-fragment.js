@@ -16,14 +16,12 @@ export default function decorate(block) {
   const slug = slugID.textContent.trim();
   
   const quoteDiv = block.querySelector('div:last-of-type');
-  const adventureDiv = document.createElement('div');
-  adventureDiv.id = "adventure-" + slug; 
-  quoteDiv.replaceWith(adventureDiv);
+  const bannerDiv = document.createElement('div');
+  bannerDiv.id = "banner-" + slug; 
+  quoteDiv.replaceWith(bannerDiv);
 
   // Add debugging information
   console.log('Starting fetch request...');
-  console.log('Slug:', slug);
-  console.log('Adventure div ID:', adventureDiv.id);
 
   const fetchUrl = 'https://prod-141.westus.logic.azure.com/workflows/ea3e538f401f450ab7ff7efc435a6d4b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=f4Vv82SF_0mwHiOEIie_18yx1m0taW6ZPuCqu-qHdNw';
   
@@ -45,45 +43,37 @@ fetch(fetchUrl)
   console.log('Parsed response:', response);
   
   // Check if response has the expected structure
-  if (!response.data || !response.data.adventureList || !response.data.adventureList.items || !response.data.adventureList.items[0]) {
+  if (!response.data || !response.data.homeBannerList || !response.data.homeBannerList.items || !response.data.homeBannerList.items[0]) {
     throw new Error('Response does not have expected structure');
   }
   
-  const adventure = response.data.adventureList.items[0];
-  console.log('Adventure data:', adventure);
+  const banner = response.data.homeBannerList.items[0];
+  console.log('Banner data:', banner);
   
   // Check if required fields exist
-  if (!adventure.primaryImage || !adventure.primaryImage._path) {
-    throw new Error('Missing primaryImage._path in response');
+  if (!banner.image || !banner.image._publishUrl) {
+    throw new Error('Missing image._publishUrl in response');
   }
   
-  const backgroundImage = adventure.primaryImage._path;
-  console.log('Background image path:', backgroundImage);
+  const bannerImage = banner.image._publishUrl;
+  console.log('Banner image URL:', bannerImage);
   
-  document.getElementById(adventureDiv.id).innerHTML = "<section><img src=" + AEM_HOST + backgroundImage + "></section>";  
+  // Create banner section with image
+  document.getElementById(bannerDiv.id).innerHTML = "<section><img src='" + bannerImage + "' alt='" + (banner.title || 'Banner') + "'></section>";  
 
-  const adventureTitle = adventure.title;
-  document.getElementById(adventureDiv.id).innerHTML += "<section><h3>"+ adventureTitle + "</h3></section>";
+  // Add title section
+  const bannerTitle = banner.title;
+  if (bannerTitle) {
+    document.getElementById(bannerDiv.id).innerHTML += "<section><h3>"+ bannerTitle + "</h3></section>";
+  }
 
-  const adventureDesc = adventure.description.plaintext;
-  document.getElementById(adventureDiv.id).innerHTML += "<section>" + adventureDesc + "</section>";
+  // Add description section
+  const bannerDesc = banner.description.plaintext;
+  if (bannerDesc) {
+    document.getElementById(bannerDiv.id).innerHTML += "<section>" + bannerDesc + "</section>";
+  }
 
-  const adventureType = adventure.adventureType;
-  document.getElementById(adventureDiv.id).innerHTML += "<section>" + "Adventure Type: " + adventureType + "</section>";
-
-  const tripLength = adventure.tripLength;
-  document.getElementById(adventureDiv.id).innerHTML += "<section>" +"Trip Length: " + tripLength + "</section>";
-
-  const tripDifficulty = adventure.difficulty;
-  document.getElementById(adventureDiv.id).innerHTML += "<section>" + "Difficulty: " + tripDifficulty + "</section>";
-
-  const groupSize = adventure.groupSize;
-  document.getElementById(adventureDiv.id).innerHTML += "<section>" + "Group Size: " + groupSize + "</section>";
-
-  const tripItinerary= adventure.itinerary.html;
-  document.getElementById(adventureDiv.id).innerHTML += "<section>" + "Itinerary: </br>" + tripItinerary + "</section>";
-
-  console.log('Successfully updated DOM with adventure data');
+  console.log('Successfully updated DOM with banner data');
 })
 .catch(error => {
   console.error('Error fetching data:', error);
@@ -94,9 +84,9 @@ fetch(fetchUrl)
   });
   
   // Display error in the DOM for debugging
-  document.getElementById(adventureDiv.id).innerHTML = `
+  document.getElementById(bannerDiv.id).innerHTML = `
     <section style="color: red; padding: 20px; border: 1px solid red;">
-      <h3>Error loading adventure data</h3>
+      <h3>Error loading banner data</h3>
       <p><strong>Error:</strong> ${error.message}</p>
       <p><strong>Type:</strong> ${error.name}</p>
       <p>Check browser console for more details.</p>
@@ -105,8 +95,3 @@ fetch(fetchUrl)
 });
 
 }
-
-
-
-
-
