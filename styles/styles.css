@@ -13,6 +13,7 @@
  :root {
   /* colors */
   --color-yellow: #ffea00;
+  --color-green: #379D5C;
   --link-color: black;
   --link-hover-color: black;
   --background-color: #fff;
@@ -49,7 +50,7 @@
   --nav-height: 66px;
 
   /* buttons */
-  --button-background-color: var(--color-yellow);
+  --button-background-color: var(--color-green);
   --button-border-radius: 0;
   --button-text-color: var(--text-color);
   --button-padding: 1em 2.5em;
@@ -107,7 +108,7 @@ body.activity h1::after {
   width: 84px;
   padding-top: 8px;
   content: "";
-  border-bottom: 2px solid var(--color-yellow);
+  border-bottom: 2px solid var(--color-green);
 }
 
 body.article h2::after {
@@ -293,6 +294,10 @@ img {
   object-fit: none !important;
   display: block !important;
   margin: 0 auto !important;
+}
+
+div.button-container > a {
+  background-color: #379D5C;
 }
 
 @media (min-width: 600px) {
