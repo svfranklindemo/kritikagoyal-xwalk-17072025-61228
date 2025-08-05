@@ -1,10 +1,3 @@
-// put your AEM publish address here
-// this fixes having to manually change the AEM host here
-const AEM_HOST = checkDomain()
-
-function checkDomain(){
-  return "https://publish-p121371-e1189853.adobeaemcloud.com/"    
-}
 
 export default function decorate(block) {
 
@@ -30,8 +23,6 @@ export default function decorate(block) {
 fetch(fetchUrl)
 .then(response => {
   console.log('Response status:', response.status);
-  console.log('Response ok:', response.ok);
-  console.log('Response headers:', response.headers);
   
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -51,11 +42,11 @@ fetch(fetchUrl)
   console.log('Banner data:', banner);
   
   // Check if required fields exist
-  if (!banner.image || !banner.image._publishUrl) {
-    throw new Error('Missing image._publishUrl in response');
+  if (!banner.image || !banner.image._authorUrl) {
+    throw new Error('Missing image._authorUrl in response');
   }
   
-  const bannerImage = banner.image._publishUrl;
+  const bannerImage = banner.image._authorUrl;
   console.log('Banner image URL:', bannerImage);
   
   // Create banner section with image
