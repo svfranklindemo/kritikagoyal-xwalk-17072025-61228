@@ -16,8 +16,25 @@ export default async function decorate(block) {
     const xfPath = linkElement.href;
     console.log('Original xfPath:', xfPath);
     
-    // Append additional text to xfPath
-    const modifiedXfPath = xfPath + '?wcmmode=disabled';
+    // Transform live environment URL to author environment URL
+    let modifiedXfPath = xfPath;
+    
+    // Replace live environment with author environment
+    if (xfPath.includes('main--kritikagoyal-xwalk-17072025-61228--svfranklindemo.aem.live')) {
+      modifiedXfPath = xfPath.replace(
+        'main--kritikagoyal-xwalk-17072025-61228--svfranklindemo.aem.live',
+        'author-p107529-e1006538.adobeaemcloud.com'
+      );
+    }
+    
+    // Append .html extension if not present
+    if (!modifiedXfPath.endsWith('.html')) {
+      modifiedXfPath = modifiedXfPath + '.html';
+    }
+    
+    // Append wcmmode=disabled parameter
+    modifiedXfPath = modifiedXfPath + '?wcmmode=disabled';
+    
     console.log('Modified xfPath:', modifiedXfPath);
 
     const response = await fetch('https://prod-182.westus.logic.azure.com:443/workflows/47a46138a72940c7a1092a514555c9f3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OikX85Ks871i2TtDzGCuX3ctSkVRAOB2LWJ1yGQvDr8', {
