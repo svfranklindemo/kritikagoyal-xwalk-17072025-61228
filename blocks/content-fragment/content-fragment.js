@@ -1,7 +1,6 @@
 
 export default function decorate(block) {
   const bannerDiv = document.createElement('div');
-  bannerDiv.id = "banner-" + slug; 
   quoteDiv.replaceWith(bannerDiv);
 
   // Get the authored link value
