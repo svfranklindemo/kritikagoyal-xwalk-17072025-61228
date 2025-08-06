@@ -219,6 +219,16 @@
         "value": "",
         "label": "Slug",
         "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "cfPath",
+        "label": "Reference",
+        "valueType": "string",
+        "required": true,
+        "validation": {
+            "rootPath": "/content/dam/kritikagoyal/pldt/content-fragments"
+        }
       }
     ]
   },  

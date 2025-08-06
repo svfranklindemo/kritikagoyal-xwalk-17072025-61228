@@ -13,14 +13,31 @@ export default function decorate(block) {
   bannerDiv.id = "banner-" + slug; 
   quoteDiv.replaceWith(bannerDiv);
 
+  // Get the authored link value
+  const linkElement = block.querySelector('a');
+  if (!linkElement) {
+    console.error('No link found in embed block');
+    block.innerHTML = '<p>No link provided</p>';
+    return;
+  }
+  
+  const cfPath = linkElement.href;
+
   // Add debugging information
   console.log('Starting fetch request...');
+  console.log('Using cfPath:', cfPath);
 
   const fetchUrl = 'https://prod-141.westus.logic.azure.com/workflows/ea3e538f401f450ab7ff7efc435a6d4b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=f4Vv82SF_0mwHiOEIie_18yx1m0taW6ZPuCqu-qHdNw';
-  
-  console.log('Fetch URL:', fetchUrl);
 
-fetch(fetchUrl)
+fetch(fetchUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    cfPath: cfPath
+  })
+})
 .then(response => {
   console.log('Response status:', response.status);
   
