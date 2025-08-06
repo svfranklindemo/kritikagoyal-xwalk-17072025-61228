@@ -14,7 +14,11 @@ export default async function decorate(block) {
     }
     
     const xfPath = linkElement.href;
-    console.log('Using xfPath:', xfPath);
+    console.log('Original xfPath:', xfPath);
+    
+    // Append additional text to xfPath
+    const modifiedXfPath = xfPath + '?wcmmode=disabled';
+    console.log('Modified xfPath:', modifiedXfPath);
 
     const response = await fetch('https://prod-182.westus.logic.azure.com:443/workflows/47a46138a72940c7a1092a514555c9f3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OikX85Ks871i2TtDzGCuX3ctSkVRAOB2LWJ1yGQvDr8', {
       method: 'POST',
@@ -22,7 +26,7 @@ export default async function decorate(block) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        xfPath: xfPath
+        xfPath: modifiedXfPath
       })
     });
 
