@@ -15,6 +15,11 @@
    overflow: hidden;
 } 
 
+/* Hide the button container */
+.button-container {
+  display: none;
+}
+
 section:nth-child(1) {
   flex: 1;
   border-radius: 12px;
@@ -30,6 +35,9 @@ section:nth-child(2) {
   bottom: 40px;
   background-color: rgb(0 0 0 / 40%);
   border-radius: 8px;
+  height: 60px; /* Adjusted height for h3 section */
+  display: flex;
+  align-items: center;
 }
 
 section:nth-child(3) {
