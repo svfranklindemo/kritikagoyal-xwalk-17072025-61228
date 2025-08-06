@@ -42,7 +42,6 @@ export default async function decorate(block) {
     }
 
     const htmlContent = await response.text();
-    console.log('Logic App response:', htmlContent);
 
     if (htmlContent && htmlContent.trim()) {
       block.innerHTML = htmlContent;
