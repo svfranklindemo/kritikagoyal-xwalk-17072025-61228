@@ -21,7 +21,19 @@ export default function decorate(block) {
     return;
   }
   
-  const cfPath = linkElement.href;
+  const fullUrl = linkElement.href;
+  console.log('Full URL:', fullUrl);
+  
+  // Extract just the path portion, removing domain and .html extension
+  const url = new URL(fullUrl);
+  let cfPath = url.pathname;
+  
+  // Remove .html extension if present
+  if (cfPath.endsWith('.html')) {
+    cfPath = cfPath.slice(0, -5); // Remove last 5 characters (.html)
+  }
+  
+  console.log('Extracted cfPath:', cfPath);
 
   // Add debugging information
   console.log('Starting fetch request...');
