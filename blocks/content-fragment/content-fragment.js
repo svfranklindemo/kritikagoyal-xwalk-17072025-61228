@@ -59,11 +59,11 @@ fetch(fetchUrl, {
   console.log('Parsed response:', response);
   
   // Check if response has the expected structure
-  if (!response.data || !response.data.homeBannerList || !response.data.homeBannerList.items || !response.data.homeBannerList.items[0]) {
+  if (!response.data || !response.data.homeBannerByPath || !response.data.homeBannerByPath.item) {
     throw new Error('Response does not have expected structure');
   }
   
-  const banner = response.data.homeBannerList.items[0];
+  const banner = response.data.homeBannerByPath.item;
   console.log('Banner data:', banner);
   
   // Check if required fields exist
