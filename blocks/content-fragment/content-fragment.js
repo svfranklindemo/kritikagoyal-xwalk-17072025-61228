@@ -1,14 +1,10 @@
 
 export default function decorate(block) {
   
-  const quoteDiv = block.querySelector('div:last-of-type');
-  const bannerDiv = document.createElement('div');
-  quoteDiv.replaceWith(bannerDiv);
-
-  // Get the authored link value
+  // Get the authored link value first
   const linkElement = block.querySelector('a');
   if (!linkElement) {
-    console.error('No link found in embed block');
+    console.error('No link found in content fragment block');
     block.innerHTML = '<p>No link provided</p>';
     return;
   }
@@ -26,6 +22,14 @@ export default function decorate(block) {
   }
   
   console.log('Extracted cfPath:', cfPath);
+  
+  // Generate a unique ID for the banner using the cfPath
+  const bannerId = 'banner-' + cfPath.replace(/[^a-zA-Z0-9]/g, '-');
+  
+  const quoteDiv = block.querySelector('div:last-of-type');
+  const bannerDiv = document.createElement('div');
+  bannerDiv.id = bannerId;
+  quoteDiv.replaceWith(bannerDiv);
 
   // Add debugging information
   console.log('Starting fetch request...');
