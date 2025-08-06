@@ -1,14 +1,5 @@
 
 export default function decorate(block) {
-
-  const slugDiv = block.querySelector('div:nth-child(1)'); 
-  const slugID = document.createElement('div');
-  slugID.id = 'slug';
-  slugDiv.replaceWith(slugID);
-  slugID.innerHTML = `${slugDiv.innerHTML}`;
-  const slug = slugID.textContent.trim();
-  
-  const quoteDiv = block.querySelector('div:last-of-type');
   const bannerDiv = document.createElement('div');
   bannerDiv.id = "banner-" + slug; 
   quoteDiv.replaceWith(bannerDiv);

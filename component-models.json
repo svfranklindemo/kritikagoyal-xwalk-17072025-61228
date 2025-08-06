@@ -217,7 +217,7 @@
         "component": "text-input",
         "name": "text",
         "value": "",
-        "label": "Slug",
+        "label": "Path",
         "valueType": "string"
       },
       {
