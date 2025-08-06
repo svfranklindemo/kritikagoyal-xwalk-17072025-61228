@@ -1,5 +1,7 @@
 
 export default function decorate(block) {
+  
+  const quoteDiv = block.querySelector('div:last-of-type');
   const bannerDiv = document.createElement('div');
   quoteDiv.replaceWith(bannerDiv);
 
