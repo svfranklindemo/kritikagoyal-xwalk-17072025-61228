@@ -273,6 +273,16 @@
         "valueType": "string",      
         "name": "url",
         "label": "Embed"
+      },
+      {
+        "component": "aem-content",
+        "name": "xfPath",
+        "label": "Reference",
+        "valueType": "string",
+        "required": true,
+        "validation": {
+            "rootPath": "/content/experience-fragments/kritikagoyal/pldt"
+        }
       }
     ]
   },  
