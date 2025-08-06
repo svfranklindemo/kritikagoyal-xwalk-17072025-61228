@@ -1,0 +1,62 @@
+.experience-fragment {
+    width: unset;
+    text-align: center;
+    max-width: 800px;
+    margin: 32px auto;
+  }
+  
+  .experience-fragment > div {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .experience-fragment.experience-fragment-twitter .twitter-tweet-rendered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .experience-fragment .experience-fragment-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+  }
+  
+  .experience-fragment .experience-fragment-placeholder > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+  }
+  
+  .experience-fragment .experience-fragment-placeholder picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .experience-fragment .experience-fragment-placeholder-play button {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(3);
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 20px;
+    padding: 0;
+  }
+  
+  .experience-fragment .experience-fragment-placeholder-play button::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 10px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid;
+    top: 4px;
+    left: 7px;
+  }

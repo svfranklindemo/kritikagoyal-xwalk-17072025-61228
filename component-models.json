@@ -291,6 +291,21 @@
     ]
   },  
   {
+    "id": "experience-fragment",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "xfPath",
+        "label": "Reference",
+        "valueType": "string",
+        "required": true,
+        "validation": {
+            "rootPath": "/content/experience-fragments/kritikagoyal/pldt"
+        }
+      }
+    ]
+  },  
+  {
     "id": "blockquote",
     "fields": [
       {
