@@ -269,12 +269,6 @@
     "id": "embed",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",      
-        "name": "url",
-        "label": "Embed"
-      },
-      {
         "component": "aem-content",
         "name": "xfPath",
         "label": "Reference",
