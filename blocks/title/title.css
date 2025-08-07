@@ -1,0 +1,30 @@
+/* Title Block Styles */
+
+.title-block {
+  margin: 1em 0;
+}
+
+/* Underline title styling */
+.title-underline {
+  font-size: var(--heading-font-size-m);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.title-underline span {
+  text-decoration: underline;
+  text-decoration-color: var(--color-green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* Link styling for titles */
+.title-block a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title-block a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+} 
