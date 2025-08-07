@@ -180,6 +180,23 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "type",
+        "value": "",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Image Left",
+            "value": "image-left"
+          },
+          {
+            "name": "Image Right",
+            "value": "image-right"
+          }
+        ]
       }
     ]
   },
