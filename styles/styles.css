@@ -286,6 +286,10 @@ img {
   height: auto;
 }
 
+#banner--content-dam-kritikagoyal-pldt-content-fragments-home-banner-cf {
+  margin-top: 20px;
+}
+
 /* Target images in sections with small-image class */
 .small-image img {
   max-width: none !important;
