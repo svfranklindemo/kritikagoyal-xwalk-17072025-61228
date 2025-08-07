@@ -180,33 +180,37 @@
     box-sizing: border-box;
 }
 
-/* Style links as buttons with site theme */
+/* Style links as buttons with site theme - using global button styles */
 .teaser-block a,
 .teaser-block .teaser-link {
-    display: inline-block;
-    background-color: var(--color-green);
-    color: white;
-    text-decoration: none;
-    padding: 0.75rem 1.5rem;
+    color: var(--button-text-color);
+    background-color: var(--button-background-color);
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: var(--button-padding);
     font-weight: 600;
-    font-size: 1rem;
+    font-family: var(--body-font-family);
+    display: inline-block;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 2px solid transparent;
+    text-align: center;
+    font-style: normal;
+    cursor: pointer;
+    margin: 16px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: var(--button-border-radius);
+    line-height: 1.5;
     transition: all 0.3s ease;
-    margin-top: 1rem;
-    border: 2px solid var(--color-green);
 }
 
 .teaser-block a:hover,
-.teaser-block .teaser-link:hover {
-    background-color: transparent;
-    color: var(--color-green);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(55, 157, 92, 0.3);
-}
-
 .teaser-block a:focus,
+.teaser-block .teaser-link:hover,
 .teaser-block .teaser-link:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(55, 157, 92, 0.3);
+    cursor: pointer;
 }
 
 /* Remove default button styling from button-container */
